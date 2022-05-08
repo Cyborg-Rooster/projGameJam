@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 class TriggerManager
 {
-    private bool Up, UpRight, Right, RightDown, Down, DownLeft, Left, LeftUp;
+    public bool Up, UpRight, Right, RightDown, Down, DownLeft, Left, LeftUp;
     
     public RaycastHit2D CheckIfExistCollider(Transform Transform, float horizontal, float vertical, string layer)
     {

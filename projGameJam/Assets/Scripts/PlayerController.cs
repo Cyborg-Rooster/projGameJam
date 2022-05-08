@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     int WalkForce = 1;
 
     Rigidbody2D Rigidbody;
+    Animator Animator;
+    SpriteRenderer SpriteRenderer;
     TriggerManager TriggerManager = new TriggerManager();
 
     RaycastHit2D ObjectInteractive;
@@ -18,6 +20,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         Rigidbody = GetComponent<Rigidbody2D>();
+        Animator = GetComponent<Animator>();
+        SpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -28,6 +32,7 @@ public class PlayerController : MonoBehaviour
         {
             Horizontal = Input.GetAxisRaw("PlayerOneHorizontal");
             Vertical = Input.GetAxisRaw("PlayerOneVertical");
+
             if (Input.GetKeyDown(KeyCode.LeftShift)) WalkForce++;
             if (Input.GetKeyUp(KeyCode.LeftShift)) WalkForce--;
 
@@ -44,6 +49,9 @@ public class PlayerController : MonoBehaviour
             if (ObjectInteractive)
                 if (Input.GetKeyDown(KeyCode.KeypadPeriod)) AddPoint();
         }
+
+        if (CheckIfMoveButtonWasPressed()) SetAnimation();
+        else Animator.SetTrigger("Stopped");
     }
 
     void FixedUpdate()
@@ -74,5 +82,27 @@ public class PlayerController : MonoBehaviour
             ObjectInteractive.collider.GetComponent<SpriteRenderer>().color = Color.blue;
             Debug.Log("Player two interacted with object.");  
         }
+    }
+
+    private void SetAnimation()
+    {
+
+        if (TriggerManager.Left) SpriteRenderer.flipX = true;
+        else if (TriggerManager.Right) SpriteRenderer.flipX = false;
+
+        if (TriggerManager.Down) Animator.SetTrigger("Down");
+        else if (TriggerManager.DownLeft || TriggerManager.RightDown) Animator.SetTrigger("DownRight");
+        else if (TriggerManager.Left || TriggerManager.Right) Animator.SetTrigger("Right");
+        else if (TriggerManager.UpRight || TriggerManager.LeftUp) Animator.SetTrigger("UpRight");
+        else if (TriggerManager.Up) Animator.SetTrigger("Up");
+
+    }
+
+    private bool CheckIfMoveButtonWasPressed()
+    {
+        if (PlayerOne) return Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D) ||
+              Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S);
+        else return Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) ||
+              Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow);
     }
 }
