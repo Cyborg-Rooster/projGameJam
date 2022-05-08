@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         ObjectInteractive = TriggerManager.CheckIfExistCollider(transform, Horizontal, Vertical, "Interactive");
+        Debug.Log(ObjectInteractive.collider == null);
         if (PlayerOne)
         {
             Horizontal = Input.GetAxisRaw("PlayerOneHorizontal");
@@ -97,19 +98,12 @@ public class PlayerController : MonoBehaviour
 
     private void AddPoint()
     {
-        if (PlayerOne) 
+        if (ObjectInteractive.collider.tag == "Interactive")
         {
-            ObjectInteractive.collider.GetComponent<SpriteRenderer>().color = Color.white;
-            Debug.Log("Player one interacted with object."); 
+            Points += ObjectInteractive.collider.GetComponent<InteractiveController>().GetActiveOrDesactiveAndReturnPoints();
+            GameManager.AddPoint(PlayerOne, Points);
         }
-        else 
-        {
-            ObjectInteractive.collider.GetComponent<SpriteRenderer>().color = Color.blue;
-            Debug.Log("Player two interacted with object.");  
-        }
-
-        Points += ObjectInteractive.collider.GetComponent<InteractiveController>().points;
-        GameManager.AddPoint(PlayerOne, Points);
+        else if (ObjectInteractive.collider.tag == "Door") ObjectInteractive.collider.GetComponent<InteractiveController>().SetActive();
 
     }
 
