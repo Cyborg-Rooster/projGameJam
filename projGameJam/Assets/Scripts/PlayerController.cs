@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
         }
 
         if (CheckIfMoveButtonWasPressed()) SetAnimation();
-        else Animator.SetTrigger("Stopped");
+        else if (!CheckIfMoveButtonWasPressed() && Horizontal == 0 && Vertical == 0) Animator.SetBool("IsWalking", false);
     }
 
     void FixedUpdate()
@@ -69,7 +69,6 @@ public class PlayerController : MonoBehaviour
         );
     }
 
-
     private void AddPoint()
     {
         if (PlayerOne) 
@@ -86,16 +85,19 @@ public class PlayerController : MonoBehaviour
 
     private void SetAnimation()
     {
+        if (Horizontal < 0) SpriteRenderer.flipX = true;
+        else if (Horizontal > 0) SpriteRenderer.flipX = false;
 
-        if (TriggerManager.Left) SpriteRenderer.flipX = true;
-        else if (TriggerManager.Right) SpriteRenderer.flipX = false;
+        Animator.SetBool("IsWalking", true);
 
-        if (TriggerManager.Down) Animator.SetTrigger("Down");
+        Animator.SetFloat("PosX", Horizontal);
+        Animator.SetFloat("PosY", Vertical);
+
+        /*if (TriggerManager.Down) Animator.SetTrigger("Down");
         else if (TriggerManager.DownLeft || TriggerManager.RightDown) Animator.SetTrigger("DownRight");
         else if (TriggerManager.Left || TriggerManager.Right) Animator.SetTrigger("Right");
         else if (TriggerManager.UpRight || TriggerManager.LeftUp) Animator.SetTrigger("UpRight");
-        else if (TriggerManager.Up) Animator.SetTrigger("Up");
-
+        else if (TriggerManager.Up) Animator.SetTrigger("Up");*/
     }
 
     private bool CheckIfMoveButtonWasPressed()

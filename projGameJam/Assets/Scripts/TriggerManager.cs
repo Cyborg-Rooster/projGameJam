@@ -18,6 +18,7 @@ class TriggerManager
 
         return collider;
     }
+
     private void SetOrientation(float horizontal, float vertical)
     {
         if (!(horizontal == 0 && vertical == 0)) 
@@ -41,7 +42,7 @@ class TriggerManager
 
     private void SetAngle(float horizontal, float vertical)
     {
-        
+
         if (vertical > 0 && horizontal == 0) Up = true;
         else if (vertical > 0 && horizontal > 0) UpRight = true;
         else if (vertical == 0 && horizontal > 0) Right = true;
