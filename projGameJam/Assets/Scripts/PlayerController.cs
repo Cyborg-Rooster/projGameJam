@@ -25,12 +25,19 @@ public class PlayerController : MonoBehaviour
     Vector3Int posiInt = new Vector3Int();
     bool tile;
     public GameObject effects;
+
+    GameObject painelOne;
+    GameObject painelTwo;
     // Start is called before the first frame update
     void Start()
     {
         Rigidbody = GetComponent<Rigidbody2D>();
         Animator = GetComponent<Animator>();
         SpriteRenderer = GetComponent<SpriteRenderer>();
+        painelOne = GameObject.Find("PanelOne");
+        painelTwo = GameObject.Find("PanelTwo");
+        painelOne.SetActive(true);
+        painelTwo.SetActive(true);
     }
 
     // Update is called once per frame
@@ -47,7 +54,11 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyUp(KeyCode.LeftShift)) WalkForce--;
 
             if (ObjectInteractive)
-                if (Input.GetKeyDown(KeyCode.K)) AddPoint();
+                if (Input.GetKeyDown(KeyCode.V)) AddPoint();
+
+            if (painelOne.activeSelf)
+                if (Input.GetKeyDown(KeyCode.G))
+                    painelOne.SetActive(false);
         }
         else
         {
@@ -57,7 +68,11 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyUp(KeyCode.RightShift)) WalkForce--;
 
             if (ObjectInteractive)
-                if (Input.GetKeyDown(KeyCode.KeypadPeriod)) AddPoint();
+                if (Input.GetKeyDown(KeyCode.L)) AddPoint();
+
+            if (painelTwo.activeSelf)
+                if (Input.GetKeyDown(KeyCode.P))
+                    painelTwo.SetActive(false);
         }
 
         if (CheckIfMoveButtonWasPressed()) SetAnimation();
