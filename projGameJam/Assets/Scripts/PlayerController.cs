@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class PlayerController : MonoBehaviour
 {
@@ -19,6 +20,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameManager GameManager;
 
     RaycastHit2D ObjectInteractive;
+
+    public Tilemap currentTilemap;
+    Vector3Int posiInt = new Vector3Int();
+    bool tile;
+    public GameObject effects;
     // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +61,23 @@ public class PlayerController : MonoBehaviour
 
         if (CheckIfMoveButtonWasPressed()) SetAnimation();
         else if (!CheckIfMoveButtonWasPressed() && Horizontal == 0 && Vertical == 0) Animator.SetBool("IsWalking", false);
+
+        posiInt = currentTilemap.WorldToCell(transform.position);
+        Color cor = currentTilemap.GetColor(posiInt);
+        tile = currentTilemap.HasTile(posiInt);
+
+        if (tile) 
+        {
+            effects.SetActive(false);
+            cor.a = 0.3f;
+            currentTilemap.color = cor;
+        }
+        else
+        {
+            effects.SetActive(true);
+            cor.a = 1f;
+            currentTilemap.color = cor;
+        }
     }
 
     void FixedUpdate()
