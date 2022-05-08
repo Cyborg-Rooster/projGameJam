@@ -16834,7 +16834,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   points: 30
   active: 1
-  ActivedSprite: {fileID: 6517139224218895389, guid: d4598c528e297e14ebf6e61eed2b8542, type: 3}
+  ActivedSprite: {fileID: -6253465111919979439, guid: d4598c528e297e14ebf6e61eed2b8542, type: 3}
   DesactivedSprite: {fileID: 842715872405459711, guid: d4598c528e297e14ebf6e61eed2b8542, type: 3}
 --- !u!212 &1556794265
 SpriteRenderer:
@@ -17131,7 +17131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   points: 30
   active: 1
-  ActivedSprite: {fileID: 6517139224218895389, guid: d4598c528e297e14ebf6e61eed2b8542, type: 3}
+  ActivedSprite: {fileID: -6253465111919979439, guid: d4598c528e297e14ebf6e61eed2b8542, type: 3}
   DesactivedSprite: {fileID: 842715872405459711, guid: d4598c528e297e14ebf6e61eed2b8542, type: 3}
 --- !u!212 &1587706797
 SpriteRenderer:
@@ -21792,16 +21792,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 8210908858441925657, guid: b05316b8b3d1e4e46b4ce591646ef25f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 5029419039493529098, guid: 33a12fd07cc1025479a4fcaccff72361, type: 3}
+    - target: {fileID: 8210908858441925657, guid: b05316b8b3d1e4e46b4ce591646ef25f, type: 3}
       propertyPath: m_Color.b
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8210908858441925657, guid: b05316b8b3d1e4e46b4ce591646ef25f, type: 3}
       propertyPath: m_Color.g
-      value: 0.039124012
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8210908858441925657, guid: b05316b8b3d1e4e46b4ce591646ef25f, type: 3}
       propertyPath: m_Color.r
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8210908858441925658, guid: b05316b8b3d1e4e46b4ce591646ef25f, type: 3}
       propertyPath: m_RootOrder
@@ -21855,6 +21859,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerTwo
       objectReference: {fileID: 0}
+    - target: {fileID: 8958057252267901421, guid: b05316b8b3d1e4e46b4ce591646ef25f, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: aad90616db74d4f4bb43753a686db769, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b05316b8b3d1e4e46b4ce591646ef25f, type: 3}
 --- !u!1 &2062852813
