@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public float MoveSpeed, MoveLimiter;
     public bool PlayerOne;
+    public int Points;
 
     public float Horizontal, Vertical;
     int WalkForce = 1;
@@ -14,6 +15,8 @@ public class PlayerController : MonoBehaviour
     Animator Animator;
     SpriteRenderer SpriteRenderer;
     TriggerManager TriggerManager = new TriggerManager();
+
+    [SerializeField] GameManager GameManager;
 
     RaycastHit2D ObjectInteractive;
     // Start is called before the first frame update
@@ -81,6 +84,10 @@ public class PlayerController : MonoBehaviour
             ObjectInteractive.collider.GetComponent<SpriteRenderer>().color = Color.blue;
             Debug.Log("Player two interacted with object.");  
         }
+
+        Points += ObjectInteractive.collider.GetComponent<InteractiveController>().points;
+        GameManager.AddPoint(PlayerOne, Points);
+
     }
 
     private void SetAnimation()
