@@ -17,6 +17,9 @@ public class InteractiveController : MonoBehaviour
     {
         SpriteRenderer = GetComponent<SpriteRenderer>();
         BoxCollider2D = GetComponent<BoxCollider2D>();
+
+        if (active) SpriteRenderer.sprite = ActivedSprite;
+        else SpriteRenderer.sprite = DesactivedSprite;
     }
 
     public int GetActiveOrDesactiveAndReturnPoints()
@@ -39,9 +42,14 @@ public class InteractiveController : MonoBehaviour
     {
         if(collision.collider.TryGetComponent<Transform>(out Transform player))
         {
-            if (player.position.y < transform.position.y) SpriteRenderer.sortingOrder = -1;
+            if (player.position.y > transform.position.y) SpriteRenderer.sortingOrder = -1;
             else SpriteRenderer.sortingOrder = 3;
         }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        SpriteRenderer.sortingOrder = 3;
     }
 }
 

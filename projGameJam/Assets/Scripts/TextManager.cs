@@ -12,9 +12,9 @@ class TextManager
         Object.GetComponent<Text>().text = text;
     }
 
-    public static void SetText(GameObject Object, int text)
+    public static void SetText(Text Object, int text)
     {
-        Object.GetComponent<Text>().text = text.ToString();
+        Object.text = text.ToString();
     }
 
     public static void SetColor(GameObject Object, Color color)

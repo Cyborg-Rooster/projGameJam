@@ -4,16 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
+
 class GameManager : MonoBehaviour
 { 
-    [SerializeField] GameObject TextPlayerOneScore;
-    [SerializeField] GameObject TextPlayerTwoScore;
+    [SerializeField] Text TextPlayerOneScore;
+    [SerializeField] Text TextPlayerTwoScore;
     [SerializeField] GameObject TextTime;
 
     public bool gameStarted = false;
 
     public int minutes;
     public float seconds;
+
+    private void Start()
+    {
+        gameStarted = true;
+    }
 
     public void AddPoint(bool playerOne, int point)
     {
@@ -36,6 +43,11 @@ class GameManager : MonoBehaviour
             }
             else gameStarted = false;
             TextManager.SetText(TextTime, $"{minutes}:{seconds:00}");
+        }
+
+        if (!gameStarted)
+        {
+
         }
     }
 }
