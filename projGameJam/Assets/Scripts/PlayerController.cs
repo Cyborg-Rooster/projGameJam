@@ -113,7 +113,14 @@ public class PlayerController : MonoBehaviour
 
     private void AddPoint()
     {
-        if (ObjectInteractive.collider.tag == "Interactive")
+        if (ObjectInteractive.collider.tag == "Interactive" && PlayerOne && !ObjectInteractive.collider.GetComponent<InteractiveController>().active)
+        {
+            Points += ObjectInteractive.collider.GetComponent<InteractiveController>().GetActiveOrDesactiveAndReturnPoints();
+            GameManager.AddPoint(PlayerOne, Points);
+        }
+        else if (ObjectInteractive.collider.tag == "Door") ObjectInteractive.collider.GetComponent<InteractiveController>().SetActive();
+
+        if (ObjectInteractive.collider.tag == "Interactive" && !PlayerOne && ObjectInteractive.collider.GetComponent<InteractiveController>().active)
         {
             Points += ObjectInteractive.collider.GetComponent<InteractiveController>().GetActiveOrDesactiveAndReturnPoints();
             GameManager.AddPoint(PlayerOne, Points);

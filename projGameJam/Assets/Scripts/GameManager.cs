@@ -12,6 +12,8 @@ class GameManager : MonoBehaviour
     [SerializeField] Text TextPlayerTwoScore;
     [SerializeField] GameObject TextTime;
 
+    [SerializeField] FinishGame finishGame;
+
     public bool gameStarted = false;
 
     public int minutes;
@@ -45,9 +47,6 @@ class GameManager : MonoBehaviour
             TextManager.SetText(TextTime, $"{minutes}:{seconds:00}");
         }
 
-        if (!gameStarted)
-        {
-
-        }
+        if (!gameStarted) finishGame.changeScene();
     }
 }
