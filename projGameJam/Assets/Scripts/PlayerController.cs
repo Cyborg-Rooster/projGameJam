@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
 
     public Tilemap currentTilemap;
     Vector3Int posiInt = new Vector3Int();
-    bool tile;
+    public bool tile;
     public GameObject effects;
 
     GameObject painelOne;
